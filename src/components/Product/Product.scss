@@ -1,5 +1,11 @@
 .product {
   width: 25%;
   min-width: 15rem;
+  padding: 1rem;
   border: 1px solid #000;
+
+  h2 {
+    margin: 0;
+    margin-bottom: 1rem;
+  }
 }

@@ -16,6 +16,6 @@
       ],
       "no-use-before-define": "off",
       "linebreak-style": 0,
-      "react/jsx-one-expression-per-line": "off"
+      "react/jsx-one-expression-per-line": "off",
   }
 }

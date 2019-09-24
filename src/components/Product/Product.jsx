@@ -4,11 +4,13 @@ import './Product.scss';
 
 const Product = ({ name, price, onClick }) => (
   <button type="button" className="product" onClick={onClick}>
-    <h2 className="Product__name">{name}</h2>
-    <span className="product__price">
-      {price}
-      €
-    </span>
+    <div className="product__wrapper">
+      <h2 className="Product__name">{name}</h2>
+      <span className="product__price">
+        {price}
+        €
+      </span>
+    </div>
   </button>
 );
 

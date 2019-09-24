@@ -1,0 +1,40 @@
+.cart {
+  overflow: hidden;
+  position: relative;
+  width: 35%;
+  height: 100vh;
+  border-left: 1px solid #000;
+}
+
+.cart__wrapper {
+  overflow-y: scroll;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 2rem;
+}
+
+.cart__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cart__list__el {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2rem 0;
+  
+  &:not(:first-child) {
+    border-top: 1px solid #000;
+  }
+}
+
+.cart__list__el__text {
+  h3 {
+    margin: 0;
+  }
+}

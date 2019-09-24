@@ -2,7 +2,8 @@ import uuid from 'react-uuid';
 import React, { Component } from 'react';
 import './App.scss';
 
-import Product from './components/Product';
+import Product from './components/Product/Product';
+import Cart from './components/Cart/Cart';
 
 const elements = [
   {
@@ -17,7 +18,7 @@ const elements = [
   },
 ];
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
 
@@ -25,11 +26,12 @@ class App extends Component {
       cart: [],
       totalPrice: 0,
     };
+    this.removeFromCart = this.removeFromCart.bind(this);
   }
 
 
   // Handlers
-  addToCart = (e, data) => {
+  addToCart = (data) => {
     // handle click
     const selected = this.state;
     selected.cart.push(data);
@@ -44,24 +46,27 @@ class App extends Component {
     this.setState(selected);
   }
 
+  emptyCart = () => {
+    const selected = this.state;
+    selected.cart = [];
+    selected.totalPrice = 0;
+    this.setState(selected);
+  }
+
 
   // Render
   render() {
     const selected = this.state;
     return (
       <div className="App">
-        <h1>Choisissez un produit</h1>
-        <ul className="product-list">
-          {elements.map((value) => <Product key={uuid()} name={value.name} price={value.price} onClick={((e) => this.addToCart(e, value))} />)}
-        </ul>
-        <h2>Produits sélectionnés</h2>
-        <p>Prix Total: {selected.totalPrice} €</p>
-        <ul className="product-list">
-          {selected.cart.map((value, index) => <Product key={uuid()} name={value.name} price={value.price} onClick={(() => this.removeFromCart(index, value))} />)}
-        </ul>
+        <div className="App__product-list">
+          <h1 className="App__title">Choisissez un produit</h1>
+          <div className="App__main__product-list">
+            {elements.map((value) => <Product key={uuid()} name={value.name} price={value.price} onClick={(() => this.addToCart(value))} />)}
+          </div>
+        </div>
+        <Cart datas={selected.cart} totalPrice={selected.totalPrice} onElementClick={this.removeFromCart} />
       </div>
     );
   }
 }
-
-export default App;
