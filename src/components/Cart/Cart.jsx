@@ -9,6 +9,7 @@ export default class Cart extends Component {
     super(props);
     this.datas = props.datas;
     this.onElementClick = props.onElementClick;
+    this.emptyCartClick = props.emptyCartClick;
   }
 
   render() {
@@ -18,6 +19,7 @@ export default class Cart extends Component {
         <div className="cart__wrapper">
           <h2 className="cart__title">Produits sélectionnés</h2>
           <p className="cart__price">Prix Total: {totalPrice} €</p>
+          <button type="button" onClick={(() => this.emptyCartClick())}>Tout supprimer</button>
           <ul className="cart__list">
             {this.datas.map((value, index) => {
               return (
@@ -42,10 +44,12 @@ Cart.propTypes = {
   datas: PropTypes.array,
   totalPrice: PropTypes.number,
   onElementClick: PropTypes.func,
+  emptyCartClick: PropTypes.func,
 };
 
 Cart.defaultProps = {
   datas: '',
   totalPrice: 0,
   onElementClick: () => {},
+  emptyCartClick: () => {},
 };

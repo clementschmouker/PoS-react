@@ -38,3 +38,32 @@
     margin: 0;
   }
 }
+
+
+.empty-validate {
+  position: fixed;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, .4);
+}
+
+.empty-validate__wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 4rem;
+  background-color: #fff;
+  text-align: center;
+
+  transform: translate(-50%, -50%);
+
+  button {
+    padding: 1rem 2rem;
+
+    &:not(:first-of-type) {
+      margin-left: 2rem;
+    }
+  }
+}

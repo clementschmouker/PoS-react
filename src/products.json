@@ -1,0 +1,82 @@
+[
+  {
+    "id": 0,
+    "name": "t-shirt",
+    "price": 2
+  },
+  {
+    "id": 1,
+    "name": "robe",
+    "price": 4
+  },
+  {
+    "id": 2,
+    "name": "écharpe",
+    "price": 4
+  },
+  {
+    "id": 3,
+    "name": "jupe",
+    "price": 4
+  },
+  {
+    "id": 4,
+    "name": "gants",
+    "price": 4
+  },
+  {
+    "id": 5,
+    "name": "jeans",
+    "price": 4
+  },
+  {
+    "id": 6,
+    "name": "veste",
+    "price": 4
+  },
+  {
+    "id": 7,
+    "name": "manteau",
+    "price": 4
+  },
+  {
+    "id": 8,
+    "name": "chemise",
+    "price": 4
+  },
+  {
+    "id": 9,
+    "name": "chaussettes",
+    "price": 4
+  },
+  {
+    "id": 10,
+    "name": "pull",
+    "price": 4
+  },
+  {
+    "id": 11,
+    "name": "robe",
+    "price": 4
+  },
+  {
+    "id": 12,
+    "name": "robe",
+    "price": 4
+  },
+  {
+    "id": 13,
+    "name": "robe",
+    "price": 4
+  },
+  {
+    "id": 14,
+    "name": "robe",
+    "price": 4
+  },
+  {
+    "id": 15,
+    "name": "robe",
+    "price": 4
+  }
+]
