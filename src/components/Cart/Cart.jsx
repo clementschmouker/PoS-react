@@ -8,7 +8,7 @@ export default class Cart extends Component {
   constructor(props) {
     super(props);
     this.datas = props.datas;
-    this.onElementClick = props.onElementClick;
+    this.removeStack = props.removeStack;
     this.emptyCartClick = props.emptyCartClick;
   }
 
@@ -25,10 +25,10 @@ export default class Cart extends Component {
               return (
                 <li key={uuid()} className="cart__list__el">
                   <div className="cart__list__el__text">
-                    <h3>{value.name}</h3>
-                    <span>{value.price} €</span>
+                    <h3>{value.name} x {value.quantity}</h3>
+                    <span>{value.price * value.quantity}€</span>
                   </div>
-                  <button type="button" onClick={(() => this.onElementClick(index, value))}>Retirer</button>
+                  <button type="button" onClick={(() => this.removeStack(index, value))}>Retirer</button>
                 </li>
               );
             })}

@@ -24,25 +24,37 @@ export default class App extends Component {
   addToCart = (data) => {
     // handle click
     const selected = this.state;
-    selected.cart.push(data);
+    // if product has no set quantity
+    if (!data.quantity) {
+      data.quantity = 1;
+    }
+    const exists = selected.cart.find(el => el.id === data.id); // check if product already is in cart
+    if (exists) {
+      // increase quantity of existing product
+      exists.quantity += 1;
+    } else {
+      // create new entry for product if needed
+      selected.cart.push(data);
+    }
+    // update cart total price
     selected.totalPrice += data.price;
     this.setState(selected);
   }
 
-  removeFromCart = (index, data) => {
+  removeFromCart = (index, data) => { // remove product stack from cart
     const selected = this.state;
     selected.cart.splice(index, 1);
-    selected.totalPrice -= data.price;
+    selected.totalPrice -= data.price * data.quantity;
     this.setState(selected);
   }
 
-  emptyCartClick = () => {
+  emptyCartClick = () => { // show the "are you sure" popup
     const selected = this.state;
     selected.validateEmptyCart = !selected.validateEmptyCart;
     this.setState(selected);
   }
 
-  emptyCart = () => {
+  emptyCart = () => { // remove all items from the cart
     const selected = this.state;
     selected.cart.splice(0, selected.cart.length);
     selected.totalPrice = 0;
@@ -72,7 +84,7 @@ export default class App extends Component {
             </div>
           </div>
         )}
-        <Cart datas={selected.cart} totalPrice={selected.totalPrice} onElementClick={this.removeFromCart} emptyCartClick={this.emptyCartClick} />
+        <Cart datas={selected.cart} totalPrice={selected.totalPrice} removeStack={this.removeFromCart} emptyCartClick={this.emptyCartClick} />
       </div>
     );
   }
