@@ -1,9 +1,16 @@
 .App {
   display: flex;
+  flex-direction: column;
   width: 100%;
+}
+
+.App__wrapper {
+  display: flex;
+  height: calc(100vh - 10rem);
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
 .App__product-list {
   width: 65%;
-  padding: 2rem;
 }

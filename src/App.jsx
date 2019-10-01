@@ -5,6 +5,8 @@ import './App.scss';
 import Product from './components/Product/Product';
 import Cart from './components/Cart/Cart';
 
+import Header from './components/Header/Header';
+
 const elements = require('./products.json');
 
 export default class App extends Component {
@@ -15,6 +17,8 @@ export default class App extends Component {
       cart: [],
       totalPrice: 0,
       validateEmptyCart: false,
+      date: new Date(),
+      address: "240 Rue de Linthout 1040 Bruxelles",
     };
     this.removeFromCart = this.removeFromCart.bind(this);
   }
@@ -82,12 +86,22 @@ export default class App extends Component {
 
     return (
       <div className="App">
-        <div className="App__product-list">
-          <div className="App__main__product-list">
-            {elements.map((value) => <Product key={uuid()} name={value.name} price={value.price} onClick={(() => this.addToCart(value))} />)}
+        <Header name="5 à sec" state={this.state}/>
+        <div className="App__wrapper">
+          <div className="App__product-list">
+            <div className="App__main__product-list">
+              {elements.map((value) => <Product key={uuid()} name={value.name} price={value.price} onClick={(() => this.addToCart(value))} />)}
+            </div>
           </div>
+          <Cart datas={selected.cart}
+                totalPrice={selected.totalPrice}
+                removeStack={this.removeFromCart}
+                emptyCartClick={this.emptyCartClick}
+                decreaseFromCart={this.decreaseFromCart}
+                addToCart={this.addToCart}
+          />
+          {/* Conditionnal popup */}
         </div>
-        {/* Conditionnal popup */}
         {selected.validateEmptyCart && (
           <div className="empty-validate">
             <div className="empty-validate__wrapper">
@@ -97,13 +111,6 @@ export default class App extends Component {
             </div>
           </div>
         )}
-        <Cart datas={selected.cart}
-              totalPrice={selected.totalPrice}
-              removeStack={this.removeFromCart}
-              emptyCartClick={this.emptyCartClick}
-              decreaseFromCart={this.decreaseFromCart}
-              addToCart={this.addToCart}
-        />
       </div>
     );
   }

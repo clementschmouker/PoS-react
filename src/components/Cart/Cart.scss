@@ -2,8 +2,9 @@
   overflow: hidden;
   position: relative;
   width: 35%;
-  height: 100vh;
-  border-left: 1px solid #000;
+  height: 100%;
+  margin-left: 2rem;
+  border: 1px solid rgba(0, 0, 0, .2);
 }
 
 .cart__wrapper {
@@ -20,13 +21,13 @@
 
 // Cart Infos
 .cart__infos {
-  height: 20vh;
+  height: 20%;
 }
 
 // Cart List
 .cart__list {
   overflow-y: scroll;
-  height: 60vh;
+  height: 60%;
   margin: 0;
   list-style: none;
 }
@@ -63,12 +64,14 @@
     border: 0;
     background: transparent;
     border-radius: 50%;
+    outline: 0;
 
     img {
       position: absolute;
       top: 50%;
       left: 50%;
       width: 50%;
+      pointer-events: none;
 
       transform: translate(-50%, -50%);
     }
@@ -107,20 +110,25 @@
 .cart__actions {
   display: flex;
   flex-direction: column;
-  height: 20vh;
+  height: 20%;
+  padding: 0;
+  border-top: 1px solid rgba(0, 0, 0, .2);
 
   button {
     height: 100%;
     border: none;
+    text-transform: uppercase;
+    font-weight: 800;
   }
 }
 
 .cart__actions__cancel {
-  background: rgba(0, 0, 0, .1);
+  background: transparent;
 }
 
 .cart__actions__proceed {
-  background: rgba(30, 255, 100, .5);
+  color: #fff;
+  background: rgba(0, 0, 0, .5);
 }
 
 

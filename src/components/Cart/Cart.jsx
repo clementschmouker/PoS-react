@@ -1,7 +1,6 @@
 import uuid from 'react-uuid';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TweenMax from 'gsap';
 
 import './Cart.scss';
 
@@ -19,8 +18,8 @@ export default class Cart extends Component {
   }
 
 
-  animateButton(el) {
-    console.log(el);
+  animateButton() {
+
   }
 
   render() {
@@ -28,21 +27,17 @@ export default class Cart extends Component {
     return (
       <div className="cart">
         <div className="cart__wrapper">
-          <div className="cart__infos">
-            <h2 className="cart__infos__title">Produits sélectionnés</h2>
-            <p className="cart__infos__price">Prix Total: {totalPrice} €</p>
-          </div>
           <ul className="cart__list">
             {this.datas.map((value, index) => {
               return (
                 <li key={uuid()} className="cart__list__el">
                   <div className="cart__list__el__text">
-                    <h3>{value.name} x {value.quantity}</h3>
+                    <h3>{value.quantity} x {value.name}</h3>
                     <span>{value.price * value.quantity}€</span>
                   </div>
                   <div className="cart__list__el__actions button-list">
                     <div className="button-list__manipulate">
-                      <button type="button" onClick={(e => { this.addToCart(value); this.animateButton(e.target) })}><img src={uparrowsvg}/></button>
+                      <button type="button" onClick={(() => this.addToCart(value))}><img src={uparrowsvg}/></button>
                       <button type="button" onClick={(() => this.decreaseFromCart(index, value))}><img src={uparrowsvg}/></button>
                     </div>
                     <button type="button" onClick={(() => this.removeStack(index, value))}>Retirer</button>
@@ -51,9 +46,12 @@ export default class Cart extends Component {
               );
             })}
           </ul>
+          <div className="cart__infos">
+            <p className="cart__infos__price">Prix Total: {totalPrice} €</p>
+          </div>
           <div className="cart__actions">
-            <button className="cart__actions__cancel" type="button" onClick={(() => this.emptyCartClick())}>Tout supprimer</button>
-            <button className="cart__actions__proceed" type="button">Procéder au paiement</button>
+            <button className="cart__actions__cancel" type="button" onClick={(() => this.emptyCartClick())}>Annuler</button>
+            <button className="cart__actions__proceed" type="button">Règlement</button>
           </div>
         </div>
       </div>

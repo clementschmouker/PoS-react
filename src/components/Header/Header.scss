@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: 10rem;
+  padding: 2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+
+.header__date {
+  display: flex;
+  flex-direction: column;
+}
+
+.header__date__time {
+  font-size: 2.8rem;
+  text-transform: uppercase;
+}
+
+.header__infos {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.header__infos__title {
+  margin: 0;
+  margin-bottom: 1rem;
+  font-size: 2.8rem;
+  text-transform: uppercase;
+}
