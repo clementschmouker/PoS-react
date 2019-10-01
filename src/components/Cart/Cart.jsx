@@ -11,15 +11,7 @@ export default class Cart extends Component {
   constructor(props) {
     super(props);
     this.datas = props.datas;
-    this.removeStack = props.removeStack;
     this.emptyCartClick = props.emptyCartClick;
-    this.decreaseFromCart = props.decreaseFromCart;
-    this.addToCart = props.addToCart;
-  }
-
-
-  animateButton() {
-
   }
 
   render() {
@@ -34,13 +26,6 @@ export default class Cart extends Component {
                   <div className="cart__list__el__text">
                     <h3>{value.quantity} x {value.name}</h3>
                     <span>{value.price * value.quantity}€</span>
-                  </div>
-                  <div className="cart__list__el__actions button-list">
-                    <div className="button-list__manipulate">
-                      <button type="button" onClick={(() => this.addToCart(value))}><img src={uparrowsvg}/></button>
-                      <button type="button" onClick={(() => this.decreaseFromCart(index, value))}><img src={uparrowsvg}/></button>
-                    </div>
-                    <button type="button" onClick={(() => this.removeStack(index, value))}>Retirer</button>
                   </div>
                 </li>
               );

@@ -6,6 +6,7 @@ import Product from './components/Product/Product';
 import Cart from './components/Cart/Cart';
 
 import Header from './components/Header/Header';
+import ChooseProduct from './components/ChooseProduct/ChooseProduct';
 
 const elements = require('./products.json');
 
@@ -20,7 +21,6 @@ export default class App extends Component {
       date: new Date(),
       address: "240 Rue de Linthout 1040 Bruxelles",
     };
-    this.removeFromCart = this.removeFromCart.bind(this);
   }
 
 
@@ -42,26 +42,6 @@ export default class App extends Component {
     }
     // update cart total price
     selected.totalPrice += data.price;
-    this.setState(selected);
-  }
-
-  decreaseFromCart = (index, data) => { // remove one instance of product from cart
-    const selected = this.state;
-    const exists = selected.cart.find(el => el.id === data.id);
-    if (exists) {
-      exists.quantity -= 1;
-    }
-    if (exists.quantity <= 0) {
-      selected.cart.splice(index, 1);
-    }
-    selected.totalPrice -= data.price;
-    this.setState(selected);
-  }
-
-  removeFromCart = (index, data) => { // remove product stack from cart
-    const selected = this.state;
-    selected.cart.splice(index, 1);
-    selected.totalPrice -= data.price * data.quantity;
     this.setState(selected);
   }
 
@@ -87,25 +67,16 @@ export default class App extends Component {
     return (
       <div className="App">
         <Header name="5 à sec" state={this.state}/>
-        <div className="App__wrapper">
-          <div className="App__product-list">
-            <div className="App__main__product-list">
-              {elements.map((value) => <Product key={uuid()} name={value.name} price={value.price} onClick={(() => this.addToCart(value))} />)}
-            </div>
-          </div>
-          <Cart datas={selected.cart}
-                totalPrice={selected.totalPrice}
-                removeStack={this.removeFromCart}
-                emptyCartClick={this.emptyCartClick}
-                decreaseFromCart={this.decreaseFromCart}
-                addToCart={this.addToCart}
-          />
-          {/* Conditionnal popup */}
-        </div>
+        <ChooseProduct elements={elements} 
+                       state={selected}
+                       addToCart={this.addToCart}
+                       emptyCartClick={this.emptyCartClick}
+        />
+        {/* Conditionnal popup */}
         {selected.validateEmptyCart && (
           <div className="empty-validate">
             <div className="empty-validate__wrapper">
-              <p>Êtes-vous sûr de vouloir tout supprimer ?</p>
+              <p>Êtes-vous sûr de vouloir tout annuler ?</p>
               <button type="button" onClick={this.emptyCart}>Oui</button>
               <button type="button" onClick={this.emptyCartClick}>Non</button>
             </div>

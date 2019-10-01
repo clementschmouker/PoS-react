@@ -11,6 +11,13 @@
   box-sizing: border-box;
 }
 
-.App__product-list {
+.App__main {
   width: 65%;
+}
+
+.App__main__product-list {
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
 }

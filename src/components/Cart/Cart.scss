@@ -39,11 +39,15 @@
   padding: 2rem 0;
   
   &:not(:first-child) {
-    border-top: 1px solid #000;
+    border-top: 1px solid rgba(0, 0, 0, .2);
   }
 }
 
 .cart__list__el__text {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
   h3 {
     margin: 0;
   }
