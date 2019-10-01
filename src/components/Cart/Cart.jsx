@@ -1,8 +1,12 @@
 import uuid from 'react-uuid';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import TweenMax from 'gsap';
 
 import './Cart.scss';
+
+// Svgs
+import uparrowsvg from '../../img/up-arrow.svg';
 
 export default class Cart extends Component {
   constructor(props) {
@@ -12,6 +16,11 @@ export default class Cart extends Component {
     this.emptyCartClick = props.emptyCartClick;
     this.decreaseFromCart = props.decreaseFromCart;
     this.addToCart = props.addToCart;
+  }
+
+
+  animateButton(el) {
+    console.log(el);
   }
 
   render() {
@@ -33,8 +42,8 @@ export default class Cart extends Component {
                   </div>
                   <div className="cart__list__el__actions button-list">
                     <div className="button-list__manipulate">
-                      <button type="button" onClick={(() => this.addToCart(value))}>+1</button>
-                      <button type="button" onClick={(() => this.decreaseFromCart(index, value))}>-1</button>
+                      <button type="button" onClick={(e => { this.addToCart(value); this.animateButton(e.target) })}><img src={uparrowsvg}/></button>
+                      <button type="button" onClick={(() => this.decreaseFromCart(index, value))}><img src={uparrowsvg}/></button>
                     </div>
                     <button type="button" onClick={(() => this.removeStack(index, value))}>Retirer</button>
                   </div>
