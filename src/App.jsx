@@ -41,6 +41,19 @@ export default class App extends Component {
     this.setState(selected);
   }
 
+  decreaseFromCart = (index, data) => { // remove one instance of product from cart
+    const selected = this.state;
+    const exists = selected.cart.find(el => el.id === data.id);
+    if (exists) {
+      exists.quantity -= 1;
+    }
+    if (exists.quantity <= 0) {
+      selected.cart.splice(index, 1);
+    }
+    selected.totalPrice -= data.price;
+    this.setState(selected);
+  }
+
   removeFromCart = (index, data) => { // remove product stack from cart
     const selected = this.state;
     selected.cart.splice(index, 1);
@@ -84,7 +97,13 @@ export default class App extends Component {
             </div>
           </div>
         )}
-        <Cart datas={selected.cart} totalPrice={selected.totalPrice} removeStack={this.removeFromCart} emptyCartClick={this.emptyCartClick} />
+        <Cart datas={selected.cart}
+              totalPrice={selected.totalPrice}
+              removeStack={this.removeFromCart}
+              emptyCartClick={this.emptyCartClick}
+              decreaseFromCart={this.decreaseFromCart}
+              addToCart={this.addToCart}
+        />
       </div>
     );
   }

@@ -7,18 +7,27 @@
 }
 
 .cart__wrapper {
-  overflow-y: scroll;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  padding: 2rem;
+
+  & > * {
+    padding: 2rem;
+  }
 }
 
+// Cart Infos
+.cart__infos {
+  height: 20vh;
+}
+
+// Cart List
 .cart__list {
+  overflow-y: scroll;
+  height: 60vh;
   margin: 0;
-  padding: 0;
   list-style: none;
 }
 
@@ -39,7 +48,38 @@
   }
 }
 
+.cart__list__el__actions {
+  display: flex;
+}
 
+.button-list__manipulate {
+  display: flex;
+  flex-direction: column;
+}
+
+
+// Cart Actions
+.cart__actions {
+  display: flex;
+  flex-direction: column;
+  height: 20vh;
+
+  button {
+    height: 100%;
+    border: none;
+  }
+}
+
+.cart__actions__cancel {
+  background: rgba(0, 0, 0, .1);
+}
+
+.cart__actions__proceed {
+  background: rgba(30, 255, 100, .5);
+}
+
+
+// Popups
 .empty-validate {
   position: fixed;
   z-index: 10;
