@@ -4,9 +4,6 @@ import PropTypes from 'prop-types';
 
 import './Cart.scss';
 
-// Svgs
-import uparrowsvg from '../../img/up-arrow.svg';
-
 export default class Cart extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +17,7 @@ export default class Cart extends Component {
       <div className="cart">
         <div className="cart__wrapper">
           <ul className="cart__list">
-            {this.datas.map((value, index) => {
+            {this.datas.map((value) => {
               return (
                 <li key={uuid()} className="cart__list__el">
                   <div className="cart__list__el__text">

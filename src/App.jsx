@@ -1,9 +1,5 @@
-import uuid from 'react-uuid';
 import React, { Component } from 'react';
 import './App.scss';
-
-import Product from './components/Product/Product';
-import Cart from './components/Cart/Cart';
 
 import Header from './components/Header/Header';
 import ChooseProduct from './components/ChooseProduct/ChooseProduct';
@@ -16,6 +12,7 @@ export default class App extends Component {
 
     this.state = {
       cart: [],
+      cartOrder: [],
       totalPrice: 0,
       validateEmptyCart: false,
       date: new Date(),
@@ -28,6 +25,7 @@ export default class App extends Component {
   addToCart = (data) => {
     // handle click
     const selected = this.state;
+    selected.cartOrder.push(data.id);
     // if product has no set quantity
     if (!data.quantity) {
       data.quantity = 1;
@@ -45,9 +43,28 @@ export default class App extends Component {
     this.setState(selected);
   }
 
+
+  removeFromCart = (data) => {
+    const selected = this.state;
+    selected.cartOrder.pop();
+    const toRemoveEl = selected.cart.find(el => el.id === data.id);
+    if (toRemoveEl) {
+      toRemoveEl.quantity -=1;
+      if (toRemoveEl.quantity === 0) {
+        selected.cart.pop();
+      }
+    }
+    selected.totalPrice -= toRemoveEl.price;
+    this.setState(selected);
+  }
+
   emptyCartClick = () => { // show the "are you sure" popup
     const selected = this.state;
-    selected.validateEmptyCart = !selected.validateEmptyCart;
+    // selected.validateEmptyCart = !selected.validateEmptyCart;
+    if (selected.cartOrder.length > 0) {
+      const toRemove = selected.cart.find(el => el.id === selected.cartOrder[selected.cartOrder.length - 1]);
+      this.removeFromCart(toRemove);
+    }
     this.setState(selected);
   }
 
@@ -66,7 +83,7 @@ export default class App extends Component {
 
     return (
       <div className="App">
-        <Header name="5 à sec" state={this.state}/>
+        <Header name="5 à sec" state={selected}/>
         <ChooseProduct elements={elements} 
                        state={selected}
                        addToCart={this.addToCart}
