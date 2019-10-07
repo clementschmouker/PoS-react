@@ -4,8 +4,15 @@ import './Cashout.scss';
 import Cart from '../Cart/Cart';
 
 export default class Cashout extends Component {
+  constructor(props) {
+    super(props);
+
+    this.returnToProductChoice = props.returnToProductChoice;
+  }
+
   render() {
     const selected = this.props.state;
+
     return (
       <div className="cashout">
         <div className="cashout__payment-method">
@@ -21,13 +28,13 @@ export default class Cashout extends Component {
           <table className="inputs__keyboard">
             <tbody>
               <tr>
-                <td>ESC</td>
+                <td onClick={(() => this.returnToProductChoice())}>ESC</td>
                 <td>7</td>
                 <td>8</td>
                 <td>9</td>
               </tr>
               <tr>
-                <td>back</td>
+                <td>Effacer</td>
                 <td>4</td>
                 <td>5</td>
                 <td>6</td>

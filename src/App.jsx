@@ -75,6 +75,12 @@ export default class App extends Component {
     selected.cashout = true;
     this.setState(selected);
   }
+  
+  returnToProductChoice = () => {
+    const selected = this.state;
+    selected.cashout = false;
+    this.setState(selected);
+  }
 
   emptyCart = () => { // remove all items from the cart
     const selected = this.state;
@@ -103,6 +109,7 @@ export default class App extends Component {
         {/* Cashout */}
         {selected.cashout && (
           <Cashout state={selected}
+                   returnToProductChoice={this.returnToProductChoice}
           
           />
         )}
