@@ -9,7 +9,9 @@ export default class Cart extends Component {
     super(props);
     this.datas = props.datas;
     this.emptyCartClick = props.emptyCartClick;
+    this.proceedToCashout = props.proceedToCashout;
   }
+
 
   render() {
     const { totalPrice } = this.props;
@@ -33,7 +35,7 @@ export default class Cart extends Component {
           </div>
           <div className="cart__actions">
             <button className="cart__actions__cancel" type="button" onClick={(() => this.emptyCartClick())}>Annuler</button>
-            <button className="cart__actions__proceed" type="button">Règlement</button>
+            <button className="cart__actions__proceed" type="button" onClick={(() => this.proceedToCashout())}>Règlement</button>
           </div>
         </div>
       </div>

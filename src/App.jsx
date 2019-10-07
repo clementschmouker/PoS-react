@@ -3,6 +3,7 @@ import './App.scss';
 
 import Header from './components/Header/Header';
 import ChooseProduct from './components/ChooseProduct/ChooseProduct';
+import Cashout from './components/Cashout/Cashout';
 
 const elements = require('./products.json');
 
@@ -15,6 +16,7 @@ export default class App extends Component {
       cartOrder: [],
       totalPrice: 0,
       validateEmptyCart: false,
+      cashout: false,
       date: new Date(),
       address: "240 Rue de Linthout 1040 Bruxelles",
     };
@@ -68,6 +70,12 @@ export default class App extends Component {
     this.setState(selected);
   }
 
+  proceedToCashout = () => {
+    const selected = this.state;
+    selected.cashout = true;
+    this.setState(selected);
+  }
+
   emptyCart = () => { // remove all items from the cart
     const selected = this.state;
     selected.cart.splice(0, selected.cart.length);
@@ -84,11 +92,20 @@ export default class App extends Component {
     return (
       <div className="App">
         <Header name="5 à sec" state={selected}/>
-        <ChooseProduct elements={elements} 
-                       state={selected}
-                       addToCart={this.addToCart}
-                       emptyCartClick={this.emptyCartClick}
-        />
+        {selected.cashout === false && (
+          <ChooseProduct elements={elements} 
+                         state={selected}
+                         addToCart={this.addToCart}
+                         emptyCartClick={this.emptyCartClick}
+                         proceedToCashout={this.proceedToCashout}
+          />
+        )}
+        {/* Cashout */}
+        {selected.cashout && (
+          <Cashout state={selected}
+          
+          />
+        )}
         {/* Conditionnal popup */}
         {selected.validateEmptyCart && (
           <div className="empty-validate">

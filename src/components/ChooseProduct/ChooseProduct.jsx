@@ -11,7 +11,8 @@ export default class ChooseProduct extends Component {
     super(props);
 
     this.addToCart = this.props.addToCart;
-    this.emptyCartClick = this.props.emptyCartClick
+    this.emptyCartClick = this.props.emptyCartClick;
+    this.proceedToCashout = this.props.proceedToCashout;
   }
 
   render() {
@@ -28,6 +29,7 @@ export default class ChooseProduct extends Component {
         <Cart datas={selected.cart}
               totalPrice={selected.totalPrice}
               emptyCartClick={this.emptyCartClick}
+              proceedToCashout={this.proceedToCashout}
         />
       </div>
     );
