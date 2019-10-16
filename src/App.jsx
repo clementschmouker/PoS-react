@@ -110,7 +110,6 @@ export default class App extends Component {
         {selected.cashout && (
           <Cashout state={selected}
                    returnToProductChoice={this.returnToProductChoice}
-          
           />
         )}
         {/* Conditionnal popup */}
