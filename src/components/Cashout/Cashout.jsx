@@ -7,7 +7,30 @@ export default class Cashout extends Component {
   constructor(props) {
     super(props);
 
+    this.totalEntered = 0;
+    this.totalDisplay = '';
     this.returnToProductChoice = props.returnToProductChoice;
+  }
+
+  onCalculatorClick(e) {
+    const val = e.target.value;
+    let tempTotal = this.totalDisplay.toString() + val.toString();
+    this.totalDisplay = tempTotal;
+    this.totalEntered = parseFloat(tempTotal);
+    this.setState({}); // used to refresh the display
+  }
+
+  onDotClick() {
+    const tempTotal = this.totalEntered.toString() + '.';
+    this.totalDisplay = tempTotal;
+    this.totalEntered = parseFloat(tempTotal);
+    this.setState({}); // used to refresh the display
+  }
+
+  clearDisplay() {
+    this.totalDisplay = '0';
+    this.totalEntered = 0;
+    this.setState({}); // used to refresh the display
   }
 
   render() {
@@ -23,32 +46,32 @@ export default class Cashout extends Component {
         </div>
         <div className="inputs">
           <div className="inputs__total">
-          
+            {this.totalDisplay}
           </div>
           <table className="inputs__keyboard">
             <tbody>
               <tr>
                 <td onClick={(() => this.returnToProductChoice())}>ESC</td>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
+                <td><button type="button" value="7" onClick={(e => this.onCalculatorClick(e))}>7</button></td>
+                <td><button type="button" value="8" onClick={(e => this.onCalculatorClick(e))}>8</button></td>
+                <td><button type="button" value="9" onClick={(e => this.onCalculatorClick(e))}>9</button></td>
               </tr>
               <tr>
-                <td>Effacer</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-              </tr>
-              <tr>
-                <td className="empty"></td>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
+                <td><button type="button" onClick={(() => this.clearDisplay())}>Effacer</button></td>
+                <td><button type="button" value="4" onClick={(e => this.onCalculatorClick(e))}>4</button></td>
+                <td><button type="button" value="5" onClick={(e => this.onCalculatorClick(e))}>5</button></td>
+                <td><button type="button" value="6" onClick={(e => this.onCalculatorClick(e))}>6</button></td>
               </tr>
               <tr>
                 <td className="empty"></td>
-                <td>0</td>
-                <td>.</td>
+                <td><button type="button" value="1" onClick={(e => this.onCalculatorClick(e))}>1</button></td>
+                <td><button type="button" value="2" onClick={(e => this.onCalculatorClick(e))}>2</button></td>
+                <td><button type="button" value="3" onClick={(e => this.onCalculatorClick(e))}>3</button></td>
+              </tr>
+              <tr>
+                <td className="empty"></td>
+                <td><button type="button" value="0" onClick={(e => this.onCalculatorClick(e))}>0</button></td>
+                <td><button type="button" onClick={(() => this.onDotClick())}>.</button></td>
                 <td>ENT</td>
               </tr>
             </tbody>
