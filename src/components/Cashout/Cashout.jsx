@@ -10,6 +10,8 @@ export default class Cashout extends Component {
     this.totalEntered = 0;
     this.totalDisplay = '';
     this.returnToProductChoice = props.returnToProductChoice;
+    this.updateReceivedMoney = props.updateReceivedMoney;
+    this.calculateCashback = props.calculateCashback;
   }
 
   onCalculatorClick(e) {
@@ -17,20 +19,20 @@ export default class Cashout extends Component {
     let tempTotal = this.totalDisplay.toString() + val.toString();
     this.totalDisplay = tempTotal;
     this.totalEntered = parseFloat(tempTotal);
-    this.setState({}); // used to refresh the display
+    this.updateReceivedMoney(this.totalEntered);
   }
 
   onDotClick() {
     const tempTotal = this.totalEntered.toString() + '.';
     this.totalDisplay = tempTotal;
     this.totalEntered = parseFloat(tempTotal);
-    this.setState({}); // used to refresh the display
+    this.updateReceivedMoney(this.totalEntered);
   }
 
   clearDisplay() {
     this.totalDisplay = '0';
     this.totalEntered = 0;
-    this.setState({}); // used to refresh the display
+    this.updateReceivedMoney(this.totalEntered);
   }
 
   render() {
@@ -46,12 +48,12 @@ export default class Cashout extends Component {
         </div>
         <div className="inputs">
           <div className="inputs__total">
-            {this.totalDisplay}
+            <p>{this.totalEntered}</p>
           </div>
           <table className="inputs__keyboard">
             <tbody>
               <tr>
-                <td onClick={(() => this.returnToProductChoice())}>ESC</td>
+                <td onClick={(() => this.returnToProductChoice())}>Retour</td>
                 <td><button type="button" value="7" onClick={(e => this.onCalculatorClick(e))}>7</button></td>
                 <td><button type="button" value="8" onClick={(e => this.onCalculatorClick(e))}>8</button></td>
                 <td><button type="button" value="9" onClick={(e => this.onCalculatorClick(e))}>9</button></td>
@@ -72,15 +74,19 @@ export default class Cashout extends Component {
                 <td className="empty"></td>
                 <td><button type="button" value="0" onClick={(e => this.onCalculatorClick(e))}>0</button></td>
                 <td><button type="button" onClick={(() => this.onDotClick())}>.</button></td>
-                <td>ENT</td>
+                <td><button type="button" onClick={(() => this.calculateCashback())}>ENT</button></td>
               </tr>
             </tbody>
           </table>
         </div>
         <Cart datas={selected.cart}
               totalPrice={selected.totalPrice}
+              isCashout={selected.cashout}
+              cashback={selected.cashback}
               emptyCartClick={this.emptyCartClick}
               proceedToCashout={this.proceedToCashout}
+              calculateCashback = {this.calculateCashback}
+              receivedMoneyDisplay={selected.receivedMoneyDisplay}
         />
       </div>
     );

@@ -28,8 +28,12 @@ export default class ChooseProduct extends Component {
         </div>
         <Cart datas={selected.cart}
               totalPrice={selected.totalPrice}
+              isCashout={selected.cashout}
+              cashback={selected.cashback}
               emptyCartClick={this.emptyCartClick}
               proceedToCashout={this.proceedToCashout}
+              calculateCashback = {this.calculateCashback}
+              receivedMoneyDisplay={selected.receivedMoneyDisplay}
         />
       </div>
     );

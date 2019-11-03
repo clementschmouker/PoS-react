@@ -15,8 +15,12 @@ export default class App extends Component {
       cart: [],
       cartOrder: [],
       totalPrice: 0,
+      receivedMoney: 0,
+      receivedMoneyDisplay: 0,
       validateEmptyCart: false,
       cashout: false,
+      cashbackCalculated: false,
+      cashback: 0,
       date: new Date(),
       address: "240 Rue de Linthout 1040 Bruxelles",
     };
@@ -60,7 +64,7 @@ export default class App extends Component {
     this.setState(selected);
   }
 
-  emptyCartClick = () => { // show the "are you sure" popup
+  emptyCartClick = () => {
     const selected = this.state;
     // selected.validateEmptyCart = !selected.validateEmptyCart;
     if (selected.cartOrder.length > 0) {
@@ -82,12 +86,23 @@ export default class App extends Component {
     this.setState(selected);
   }
 
-  emptyCart = () => { // remove all items from the cart
+  updateReceivedMoney = (newAmount) => {
     const selected = this.state;
-    selected.cart.splice(0, selected.cart.length);
-    selected.totalPrice = 0;
+    selected.receivedMoney = newAmount;
+    console.log(newAmount);
     this.setState(selected);
-    this.emptyCartClick();
+  }
+  
+  calculateCashback = () => {
+    const selected = this.state;
+    selected.cashbackCalculated = true;
+    selected.receivedMoneyDisplay = selected.receivedMoney;
+    if (selected.receivedMoney - selected.totalPrice >= 0) {
+      selected.cashback = selected.receivedMoney - selected.totalPrice;
+    } else {
+      selected.cashback = 0;
+    }
+    this.setState(selected);
   }
 
 
@@ -98,6 +113,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <Header name="5 à sec" state={selected}/>
+        {/* Product choice */}
         {selected.cashout === false && (
           <ChooseProduct elements={elements} 
                          state={selected}
@@ -110,17 +126,9 @@ export default class App extends Component {
         {selected.cashout && (
           <Cashout state={selected}
                    returnToProductChoice={this.returnToProductChoice}
+                   updateReceivedMoney={this.updateReceivedMoney}
+                   calculateCashback={this.calculateCashback}
           />
-        )}
-        {/* Conditionnal popup */}
-        {selected.validateEmptyCart && (
-          <div className="empty-validate">
-            <div className="empty-validate__wrapper">
-              <p>Êtes-vous sûr de vouloir tout annuler ?</p>
-              <button type="button" onClick={this.emptyCart}>Oui</button>
-              <button type="button" onClick={this.emptyCartClick}>Non</button>
-            </div>
-          </div>
         )}
       </div>
     );
