@@ -9,17 +9,23 @@ export default class Cashout extends Component {
 
     this.totalEntered = 0;
     this.totalDisplay = '';
+    this.conveyorNumber = 0;
+    this.conveyorNumberDisplay = '';
     this.returnToProductChoice = props.returnToProductChoice;
     this.updateReceivedMoney = props.updateReceivedMoney;
+    this.updateConveyorNumber = props.updateConveyorNumber;
     this.calculateCashback = props.calculateCashback;
   }
 
   onCalculatorClick(e) {
     const val = e.target.value;
-
-    if (this.props.cashoutConveyor === true) {
-      const tempTotal = this.conveyorNumber.toString() + val.toString();
-      this.conveyorNumber = parseInt(tempTotal);
+    const { state } = this.props;
+    if (state.cashoutConveyor === true) {
+      console.log(state.cashoutConveyor);
+      const tempConveyor = this.conveyorNumberDisplay.toString() + val.toString();
+      this.conveyorNumberDisplay = tempConveyor;
+      this.conveyorNumber = parseFloat(tempConveyor);
+      this.updateConveyorNumber(this.conveyorNumber);
     } else {
       const tempTotal = this.totalDisplay.toString() + val.toString();
       this.totalDisplay = tempTotal;
@@ -44,6 +50,22 @@ export default class Cashout extends Component {
   render() {
     const selected = this.props.state;
 
+    let displayElement;
+
+    if (selected.cashoutConveyor) {
+      displayElement = (
+        <div className="inputs__total">
+          <span>Numéro de convoyeur: </span> <span className="inputs__total__numbers">{this.conveyorNumberDisplay}</span>
+        </div>
+      );
+    } else {
+      displayElement = (
+        <div className="inputs__total">
+          <span>Reçu: </span> <span className="inputs__total__numbers">{this.totalDisplay}</span>
+        </div>
+      );
+    }
+
     return (
       <div className="cashout">
         <div className="cashout__payment-method">
@@ -53,9 +75,7 @@ export default class Cashout extends Component {
           <label htmlFor="bancontact">Bancontact</label>
         </div>
         <div className="inputs">
-          <div className="inputs__total">
-            <span>Reçu: </span> <span className="inputs__total__numbers">{this.totalEntered}</span>
-          </div>
+          {displayElement}
           <table className="inputs__keyboard">
             <tbody>
               <tr>
