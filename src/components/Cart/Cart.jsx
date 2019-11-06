@@ -48,6 +48,9 @@ export default class Cart extends Component {
             {this.props.cashback !== 0 && (
               <p className="cart__infos__cashback">A rendre: {this.props.cashback} €</p>
             )}
+            {this.props.conveyorNumber !== 0 && (
+              <p className="cart__infos__conveyor">Numéro de convoyeur: {this.props.conveyorNumber}</p>
+            )}
           </div>
           <div className="cart__actions">
             <button className="cart__actions__cancel" type="button" onClick={(() => this.emptyCartClick())}>Annuler</button>
@@ -63,6 +66,7 @@ export default class Cart extends Component {
 Cart.propTypes = {
   datas: PropTypes.array,
   totalPrice: PropTypes.number,
+  isCashout: PropTypes.bool,
   onElementClick: PropTypes.func,
   emptyCartClick: PropTypes.func,
 };
@@ -70,6 +74,7 @@ Cart.propTypes = {
 Cart.defaultProps = {
   datas: '',
   totalPrice: 0,
+  isCashout: false,
   onElementClick: () => {},
   emptyCartClick: () => {},
 };

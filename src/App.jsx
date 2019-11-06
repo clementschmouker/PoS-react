@@ -17,8 +17,10 @@ export default class App extends Component {
       totalPrice: 0,
       receivedMoney: 0,
       receivedMoneyDisplay: 0,
+      conveyorNumber: 0,
       validateEmptyCart: false,
       cashout: false,
+      cashoutConveyor: false,
       cashbackCalculated: false,
       cashback: 0,
       date: new Date(),
@@ -83,13 +85,13 @@ export default class App extends Component {
   returnToProductChoice = () => {
     const selected = this.state;
     selected.cashout = false;
+    selected.cashoutConveyor = true;
     this.setState(selected);
   }
 
   updateReceivedMoney = (newAmount) => {
     const selected = this.state;
     selected.receivedMoney = newAmount;
-    console.log(newAmount);
     this.setState(selected);
   }
   
@@ -102,6 +104,13 @@ export default class App extends Component {
     } else {
       selected.cashback = 0;
     }
+    this.switchToConveyor();
+    this.setState(selected);
+  }
+
+  switchToConveyor = () => {
+    const selected = this.state;
+    selected.cashoutConveyor = true;
     this.setState(selected);
   }
 

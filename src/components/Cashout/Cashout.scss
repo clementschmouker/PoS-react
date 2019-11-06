@@ -37,10 +37,15 @@
 
 
 .inputs__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 6rem;
+  padding: 0 2rem;
   border: 1px solid rgba(0, 0, 0, .2);
 }
+
 
 .inputs__keyboard {
   width: calc(100% + 4rem);

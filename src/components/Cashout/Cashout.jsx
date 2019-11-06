@@ -16,10 +16,16 @@ export default class Cashout extends Component {
 
   onCalculatorClick(e) {
     const val = e.target.value;
-    let tempTotal = this.totalDisplay.toString() + val.toString();
-    this.totalDisplay = tempTotal;
-    this.totalEntered = parseFloat(tempTotal);
-    this.updateReceivedMoney(this.totalEntered);
+
+    if (this.props.cashoutConveyor === true) {
+      const tempTotal = this.conveyorNumber.toString() + val.toString();
+      this.conveyorNumber = parseInt(tempTotal);
+    } else {
+      const tempTotal = this.totalDisplay.toString() + val.toString();
+      this.totalDisplay = tempTotal;
+      this.totalEntered = parseFloat(tempTotal);
+      this.updateReceivedMoney(this.totalEntered);
+    }
   }
 
   onDotClick() {
@@ -48,7 +54,7 @@ export default class Cashout extends Component {
         </div>
         <div className="inputs">
           <div className="inputs__total">
-            <p>{this.totalEntered}</p>
+            <span>Reçu: </span> <span className="inputs__total__numbers">{this.totalEntered}</span>
           </div>
           <table className="inputs__keyboard">
             <tbody>
@@ -81,6 +87,7 @@ export default class Cashout extends Component {
         </div>
         <Cart datas={selected.cart}
               totalPrice={selected.totalPrice}
+              conveyorNumber={selected.conveyorNumber}
               isCashout={selected.cashout}
               cashback={selected.cashback}
               emptyCartClick={this.emptyCartClick}

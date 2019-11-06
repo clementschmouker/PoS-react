@@ -8,6 +8,9 @@
 }
 
 .cart__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: absolute;
   top: 0;
   right: 0;
@@ -21,13 +24,13 @@
 
 // Cart Infos
 .cart__infos {
-  height: 20%;
+  // height: 20%;
 }
 
 // Cart List
 .cart__list {
   overflow-y: scroll;
-  height: 60%;
+  // height: 60%;
   margin: 0;
   list-style: none;
 }
@@ -115,6 +118,7 @@
   display: flex;
   flex-direction: column;
   height: 20%;
+  min-height: 10rem;
   padding: 0;
   border-top: 1px solid rgba(0, 0, 0, .2);
 
