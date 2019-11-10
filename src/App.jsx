@@ -97,7 +97,6 @@ export default class App extends Component {
   }
 
   updateConveyorNumber = (newNumber) => {
-    console.log(newNumber);
     const selected = this.state;
     selected.conveyorNumber = newNumber;
     this.setState(selected);

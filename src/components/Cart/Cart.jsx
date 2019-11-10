@@ -20,7 +20,7 @@ export default class Cart extends Component {
     let proceedContent;
 
     if (isCashout === true) {
-      proceedContent = <button className="cart__actions__proceed" type="button" onClick={(() => this.calculateCashback())}>Continuer</button>;
+      proceedContent = <button className="cart__actions__proceed" type="button" onClick={(() => this.calculateCashback())}>Continuer</button>
     } else {
       proceedContent = <button className="cart__actions__proceed" type="button" onClick={(() => this.proceedToCashout())}>Règlement</button>
     }

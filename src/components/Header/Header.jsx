@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import './Header.scss';
 
+import home from '../../home.svg';
+
 
 export default class Header extends Component {
   componentDidMount() {
@@ -33,9 +35,14 @@ export default class Header extends Component {
     const year = this.props.state.date.getFullYear();
     return (
       <div className="header">
-        <div className="header__date">
-          <span className="header__date__time">{this.props.state.date.toLocaleTimeString('FR-fr')}</span>
-          <span className="header__date__day">{day}/{month}/{year}</span>
+        <div className="header__controls">
+          <button type="button" className="header__controls__home">
+            <img src={home} alt="home"/>
+          </button>
+          <div className="header__date">
+            <span className="header__date__time">{this.props.state.date.toLocaleTimeString('FR-fr')}</span>
+            <span className="header__date__day">{day}/{month}/{year}</span>
+          </div>
         </div>
         <div className="header__infos">
           <h1 className="header__infos__title">{this.props.name}</h1>
