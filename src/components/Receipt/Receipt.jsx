@@ -10,6 +10,12 @@ export default class Receipt extends Component {
 
     this.date = new Date();
     this.datas = this.props.cart;
+    
+  }
+
+  componentDidMount() { // returns to homepage after printing
+    window.print();
+    window.location.href = '/';
   }
 
   render() {
@@ -45,7 +51,8 @@ export default class Receipt extends Component {
           </ul>
         </div>
           <div>Payé par {selected.bancontact ? 'Bancontact' : 'Cash'}</div>
-          <div>Montant: {selected.receivedMoney} €</div>
+          <div>Prix: {selected.totalPrice} €</div>
+          <div>Reçu: {selected.receivedMoney} €</div>
           {selected.cashback !== 0 && (
             <p>Rendu: {selected.cashback} €</p>
           )}

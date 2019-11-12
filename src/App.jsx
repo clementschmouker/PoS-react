@@ -145,7 +145,9 @@ export default class App extends Component {
 
     return (
       <div className="App">
-        <Header name="5 à sec" state={selected}/>
+        {selected.showTicket === false && (
+          <Header name="5 à sec" state={selected}/>
+        )}
         {/* Product choice */}
         {selected.cashout === false && selected.showTicket === false && (
           <ChooseProduct elements={elements} 
