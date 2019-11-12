@@ -11,18 +11,22 @@ export default class Cart extends Component {
     this.emptyCartClick = props.emptyCartClick;
     this.proceedToCashout = props.proceedToCashout;
     this.calculateCashback = props.calculateCashback;
+    this.showTicketPage = props.showTicketPage;
   }
 
 
   render() {
     const { totalPrice } = this.props;
     const { isCashout } = this.props;
+    const { isConveyor } = this.props;
     let proceedContent;
-
+    
+    proceedContent = <button className="cart__actions__proceed" type="button" onClick={(() => this.proceedToCashout())}>Règlement</button>
     if (isCashout === true) {
       proceedContent = <button className="cart__actions__proceed" type="button" onClick={(() => this.calculateCashback())}>Continuer</button>
-    } else {
-      proceedContent = <button className="cart__actions__proceed" type="button" onClick={(() => this.proceedToCashout())}>Règlement</button>
+    }
+    if (isConveyor === true) {
+      proceedContent = <button className="cart__actions__proceed" type="button" onClick={(() => this.showTicketPage())}>Imprimer un ticket</button>
     }
 
     return (
@@ -67,6 +71,7 @@ Cart.propTypes = {
   datas: PropTypes.array,
   totalPrice: PropTypes.number,
   isCashout: PropTypes.bool,
+  isConveyor: PropTypes.bool,
   onElementClick: PropTypes.func,
   emptyCartClick: PropTypes.func,
 };
@@ -75,6 +80,7 @@ Cart.defaultProps = {
   datas: '',
   totalPrice: 0,
   isCashout: false,
+  isConveyor: false,
   onElementClick: () => {},
   emptyCartClick: () => {},
 };

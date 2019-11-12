@@ -15,13 +15,14 @@ export default class Cashout extends Component {
     this.updateReceivedMoney = props.updateReceivedMoney;
     this.updateConveyorNumber = props.updateConveyorNumber;
     this.calculateCashback = props.calculateCashback;
+    this.useBancontact = props.useBancontact;
+    this.showTicketPage = props.showTicketPage;
   }
 
   onCalculatorClick(e) {
     const val = e.target.value;
     const { state } = this.props;
     if (state.cashoutConveyor === true) {
-      console.log(state.cashoutConveyor);
       const tempConveyor = this.conveyorNumberDisplay.toString() + val.toString();
       this.conveyorNumberDisplay = tempConveyor;
       this.conveyorNumber = parseFloat(tempConveyor);
@@ -69,10 +70,12 @@ export default class Cashout extends Component {
     return (
       <div className="cashout">
         <div className="cashout__payment-method">
-          <input type="radio" name="method" id="cash" value="cash" defaultChecked />
+          {/* <input type="radio" name="method" id="cash" value="cash" defaultChecked />
           <label htmlFor="cash">Cash</label>
           <input type="radio" name="method" id="bancontact" value="bancontact" />
-          <label htmlFor="bancontact">Bancontact</label>
+          <label htmlFor="bancontact">Bancontact</label> */}
+          <div className={this.props.state.bancontact ? 'cashout__payment-method__el' : 'cashout__payment-method__el checked'} onClick={(() => this.useBancontact(false))}>Cash</div>
+          <div className={this.props.state.bancontact ? 'cashout__payment-method__el checked' : 'cashout__payment-method__el'} onClick={(() => this.useBancontact(true))}>Bancontact</div>
         </div>
         <div className="inputs">
           {displayElement}
@@ -109,11 +112,13 @@ export default class Cashout extends Component {
               totalPrice={selected.totalPrice}
               conveyorNumber={selected.conveyorNumber}
               isCashout={selected.cashout}
+              isConveyor={selected.cashoutConveyor}
               cashback={selected.cashback}
               emptyCartClick={this.emptyCartClick}
               proceedToCashout={this.proceedToCashout}
               calculateCashback = {this.calculateCashback}
               receivedMoneyDisplay={selected.receivedMoneyDisplay}
+              showTicketPage={this.showTicketPage}
         />
       </div>
     );

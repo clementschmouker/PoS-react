@@ -36,9 +36,9 @@ export default class Header extends Component {
     return (
       <div className="header">
         <div className="header__controls">
-          <button type="button" className="header__controls__home">
+          <a className="header__controls__home" href="/">
             <img src={home} alt="home"/>
-          </button>
+          </a>
           <div className="header__date">
             <span className="header__date__time">{this.props.state.date.toLocaleTimeString('FR-fr')}</span>
             <span className="header__date__day">{day}/{month}/{year}</span>

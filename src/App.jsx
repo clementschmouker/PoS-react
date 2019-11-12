@@ -23,6 +23,8 @@ export default class App extends Component {
       cashout: false,
       cashoutConveyor: false,
       cashbackCalculated: false,
+      showTicket: false,
+      bancontact: false,
       cashback: 0,
       date: new Date(),
       address: "240 Rue de Linthout 1040 Bruxelles",
@@ -121,6 +123,18 @@ export default class App extends Component {
     this.setState(selected);
   }
 
+  showTicketPage = () => {
+    const selected = this.state;
+    selected.showTicket = true;
+    this.setState(selected);
+  }
+
+  useBancontact = (bool) => {
+    const selected = this.state;
+    selected.bancontact = bool;
+    this.setState(selected);
+  }
+
 
   // Render
   render() {
@@ -145,6 +159,8 @@ export default class App extends Component {
                    updateReceivedMoney={this.updateReceivedMoney}
                    updateConveyorNumber= {this.updateConveyorNumber}
                    calculateCashback={this.calculateCashback}
+                   useBancontact={this.useBancontact}
+                   showTicketPage={this.showTicketPage}
           />
         )}
       </div>
