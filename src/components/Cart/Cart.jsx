@@ -45,7 +45,9 @@ export default class Cart extends Component {
             })}
           </ul>
           <div className="cart__infos">
-            <p className="cart__infos__price">Prix Total: {totalPrice} €</p>
+            {this.props.datas.length > 0 && (
+              <p className="cart__infos__price">Prix Total: {totalPrice} €</p>
+            )}
             {this.props.receivedMoneyDisplay !== 0 && (
               <p className="cart__infos__received">Reçu: {this.props.receivedMoneyDisplay} €</p>
             )}

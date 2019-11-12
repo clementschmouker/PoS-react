@@ -14,6 +14,7 @@ export default class Receipt extends Component {
   }
 
   componentDidMount() { // returns to homepage after printing
+    // TODO store datas in sales table
     window.print();
     window.location.href = '/';
   }
