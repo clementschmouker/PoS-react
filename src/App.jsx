@@ -4,6 +4,7 @@ import './App.scss';
 import Header from './components/Header/Header';
 import ChooseProduct from './components/ChooseProduct/ChooseProduct';
 import Cashout from './components/Cashout/Cashout';
+import Receipt from './components/Receipt/Receipt';
 
 const elements = require('./products.json');
 
@@ -27,6 +28,7 @@ export default class App extends Component {
       bancontact: false,
       cashback: 0,
       date: new Date(),
+      ticketDate: new Date(),
       address: "240 Rue de Linthout 1040 Bruxelles",
     };
   }
@@ -53,7 +55,6 @@ export default class App extends Component {
     selected.totalPrice += data.price;
     this.setState(selected);
   }
-
 
   removeFromCart = (data) => {
     const selected = this.state;
@@ -125,7 +126,9 @@ export default class App extends Component {
 
   showTicketPage = () => {
     const selected = this.state;
+    selected.cashout = false;
     selected.showTicket = true;
+    selected.ticketDate = new Date();
     this.setState(selected);
   }
 
@@ -144,7 +147,7 @@ export default class App extends Component {
       <div className="App">
         <Header name="5 à sec" state={selected}/>
         {/* Product choice */}
-        {selected.cashout === false && (
+        {selected.cashout === false && selected.showTicket === false && (
           <ChooseProduct elements={elements} 
                          state={selected}
                          addToCart={this.addToCart}
@@ -162,6 +165,10 @@ export default class App extends Component {
                    useBancontact={this.useBancontact}
                    showTicketPage={this.showTicketPage}
           />
+        )}
+        {/* Ticket Page */}
+        {selected.showTicket && (
+          <Receipt state={selected}/>
         )}
       </div>
     );
